@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Login - JobPortal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        JobPortal
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/jobs">
+            Jobs
+        </a>
+
+        <a href="/register">
+            Register
+        </a>
+
+    </div>
+
+</nav>
+
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+
+        <div class="flash-container">
+
+            {% for message in messages %}
+
+                <div class="flash-message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+<div class="form-container">
+
+    <form method="POST"
+          class="auth-form"
+          id="loginForm">
+
+        <div class="form-icon">
+            🔐
+        </div>
+
+        <h2>
+            Welcome Back
+        </h2>
+
+        <p class="form-subtitle">
+            Login to your JobPortal account.
+        </p>
+
+
+        <label>
+            Email
+        </label>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+
+        <label>
+            Password
+        </label>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+        >
+
+
+        <button type="submit">
+            Login
+        </button>
+
+
+        <p class="form-footer">
+
+            Don't have an account?
+
+            <a href="/register">
+                Create Account
+            </a>
+
+        </p>
+
+    </form>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

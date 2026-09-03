@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Register - JobPortal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        JobPortal
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/jobs">
+            Jobs
+        </a>
+
+        <a href="/login">
+            Login
+        </a>
+
+    </div>
+
+</nav>
+
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+
+        <div class="flash-container">
+
+            {% for message in messages %}
+
+                <div class="flash-message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+<div class="form-container">
+
+    <form method="POST"
+          class="auth-form"
+          id="registerForm">
+
+        <div class="form-icon">
+            👤
+        </div>
+
+        <h2>
+            Create Account
+        </h2>
+
+        <p class="form-subtitle">
+            Join JobPortal today.
+        </p>
+
+
+        <label>
+            Full Name
+        </label>
+
+        <input
+            type="text"
+            name="username"
+            placeholder="Enter your full name"
+            required
+        >
+
+
+        <label>
+            Email
+        </label>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+        >
+
+
+        <label>
+            Password
+        </label>
+
+        <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="Minimum 6 characters"
+            required
+        >
+
+
+        <label>
+            Account Type
+        </label>
+
+        <select name="role">
+
+            <option value="jobseeker">
+                Job Seeker
+            </option>
+
+            <option value="recruiter">
+                Recruiter
+            </option>
+
+        </select>
+
+
+        <button type="submit">
+            Create Account
+        </button>
+
+
+        <p class="form-footer">
+
+            Already have an account?
+
+            <a href="/login">
+                Login
+            </a>
+
+        </p>
+
+    </form>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

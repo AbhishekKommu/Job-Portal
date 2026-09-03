@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Jobs - JobPortal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        JobPortal
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/jobs">
+            Jobs
+        </a>
+
+        {% if session.get("role") == "recruiter" %}
+            <a href="/post-job">
+                Post Job
+            </a>
+        {% endif %}
+
+        {% if session.get("username") %}
+
+            <span>
+                Hi, {{ session["username"] }}
+            </span>
+
+            <a href="/logout">
+                Logout
+            </a>
+
+        {% else %}
+
+            <a href="/login">
+                Login
+            </a>
+
+            <a href="/register"
+               class="nav-button">
+                Register
+            </a>
+
+        {% endif %}
+
+    </div>
+
+</nav>
+
+
+<!-- Flash -->
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+
+        <div class="flash-container">
+
+            {% for message in messages %}
+
+                <div class="flash-message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+<section class="container jobs-page">
+
+    <div class="section-title">
+
+        <h1>
+            Find Jobs
+        </h1>
+
+        <p>
+            Search for your next career opportunity.
+        </p>
+
+    </div>
+
+
+    <!-- Search -->
+
+    <form action="/jobs"
+          method="GET"
+          class="filter-box">
+
+        <input
+            type="text"
+            name="keyword"
+            value="{{ keyword }}"
+            placeholder="Job title or company"
+        >
+
+        <input
+            type="text"
+            name="location"
+            value="{{ location }}"
+            placeholder="Location"
+        >
+
+        <button type="submit">
+            Search
+        </button>
+
+    </form>
+
+
+    <!-- Jobs -->
+
+    {% if jobs %}
+
+        <div class="job-list">
+
+            {% for job in jobs %}
+
+            <div class="job-card">
+
+                <div class="job-icon">
+                    💼
+                </div>
+
+                <h2>
+                    {{ job.title }}
+                </h2>
+
+                <p class="company">
+                    {{ job.company }}
+                </p>
+
+                <p>
+                    📍 {{ job.location }}
+                </p>
+
+                <p>
+                    💰 {{ job.salary }}
+                </p>
+
+                <p>
+                    🕒 {{ job.type }}
+                </p>
+
+                <p class="description">
+                    {{ job.description }}
+                </p>
+
+
+                <form action="/apply/{{ job.id }}"
+                      method="POST">
+
+                    <button
+                        type="submit"
+                        class="apply-btn">
+
+                        Apply Now
+
+                    </button>
+
+                </form>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <div class="no-jobs">
+
+            <div class="empty-icon">
+                🔍
+            </div>
+
+            <h2>
+                No Jobs Found
+            </h2>
+
+            <p>
+                Try searching with another keyword
+                or location.
+            </p>
+
+            <a href="/jobs"
+               class="view-button">
+
+                Show All Jobs
+
+            </a>
+
+        </div>
+
+    {% endif %}
+
+</section>
+
+
+<footer>
+
+    <p>
+        © 2026 JobPortal. All rights reserved.
+    </p>
+
+</footer>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

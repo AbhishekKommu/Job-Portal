@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Post Job - JobPortal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+<nav class="navbar">
+
+    <div class="logo">
+        JobPortal
+    </div>
+
+    <div class="nav-links">
+
+        <a href="/">
+            Home
+        </a>
+
+        <a href="/jobs">
+            Jobs
+        </a>
+
+        <a href="/post-job">
+            Post Job
+        </a>
+
+        <a href="/logout">
+            Logout
+        </a>
+
+    </div>
+
+</nav>
+
+
+{% with messages = get_flashed_messages() %}
+
+    {% if messages %}
+
+        <div class="flash-container">
+
+            {% for message in messages %}
+
+                <div class="flash-message">
+                    {{ message }}
+                </div>
+
+            {% endfor %}
+
+        </div>
+
+    {% endif %}
+
+{% endwith %}
+
+
+<div class="form-container">
+
+    <form method="POST"
+          class="auth-form job-form"
+          id="jobForm">
+
+        <div class="form-icon">
+            📢
+        </div>
+
+        <h2>
+            Post a Job
+        </h2>
+
+        <p class="form-subtitle">
+            Find the right candidate for your company.
+        </p>
+
+
+        <label>
+            Job Title
+        </label>
+
+        <input
+            type="text"
+            name="title"
+            placeholder="e.g. Python Developer"
+            required
+        >
+
+
+        <label>
+            Company
+        </label>
+
+        <input
+            type="text"
+            name="company"
+            placeholder="Company name"
+            required
+        >
+
+
+        <label>
+            Location
+        </label>
+
+        <input
+            type="text"
+            name="location"
+            placeholder="e.g. Hyderabad"
+            required
+        >
+
+
+        <label>
+            Salary
+        </label>
+
+        <input
+            type="text"
+            name="salary"
+            placeholder="e.g. ₹5 - ₹8 LPA"
+            required
+        >
+
+
+        <label>
+            Job Type
+        </label>
+
+        <select name="type" required>
+
+            <option value="">
+                Select job type
+            </option>
+
+            <option value="Full Time">
+                Full Time
+            </option>
+
+            <option value="Part Time">
+                Part Time
+            </option>
+
+            <option value="Internship">
+                Internship
+            </option>
+
+            <option value="Remote">
+                Remote
+            </option>
+
+        </select>
+
+
+        <label>
+            Job Description
+        </label>
+
+        <textarea
+            name="description"
+            rows="6"
+            placeholder="Enter job description..."
+            required
+        ></textarea>
+
+
+        <button type="submit">
+            Post Job
+        </button>
+
+    </form>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
